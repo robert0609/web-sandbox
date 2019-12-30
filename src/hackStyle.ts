@@ -1,12 +1,10 @@
 /*
- * @Author: your name
- * @Date: 2019-12-30 17:45:21
- * @LastEditTime : 2019-12-30 19:00:40
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /web-sandbox/src/hackStyle.ts
+ * @Author: bluefox
+ * @Date: 2019-12-30 22:48:02
+ * @LastEditors  : bluefox
+ * @LastEditTime : 2019-12-30 22:59:29
+ * @Description: hack html元素的style对象
  */
-
 
 export default function (target: HTMLElement) {
   // 沙箱期间被更新的全局变量的原始值

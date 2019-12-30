@@ -5,8 +5,8 @@ import hackEventListener from "./hackEventListener";
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:20:23
- * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2019-12-30 15:34:33
+ * @LastEditors  : bluefox
+ * @LastEditTime : 2019-12-30 22:59:39
  * @Description: 浏览器端JavaScript脚本的沙盒执行环境，会记录全局变量的修改
  */
 
