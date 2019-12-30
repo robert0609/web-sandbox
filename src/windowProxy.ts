@@ -1,11 +1,11 @@
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:58:30
- * @LastEditors  : Please set LastEditors
- * @LastEditTime : 2019-12-30 15:51:33
+ * @LastEditors  : bluefox
+ * @LastEditTime : 2019-12-30 23:29:32
  * @Description: 生成window代理对象，构造window全局沙盒
  */
-function generate() {
+export default function () {
   // 沙箱期间被更新的全局变量的原始值
   const modifiedPropsOriginalValueMapInSandbox = new Map<PropertyKey, any>();
 
@@ -63,4 +63,4 @@ function generate() {
       modifiedPropsOriginalValueMapInSandbox.clear();
     }
   };
-}
+};
