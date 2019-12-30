@@ -1,10 +1,8 @@
-import { sleep } from "./utils";
-
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:59:29
- * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-30 00:09:28
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2019-12-30 14:20:28
  * @Description: hack全局定时器
  */
 
@@ -40,9 +38,7 @@ export default function () {
       window.setInterval = originalWindowInterval;
       window.setTimeout = originalWindowTimeout;
 
-      timerIds.forEach(async id => {
-        // 延迟 timeout 的清理，因为可能会有动画还没完成
-        await sleep(500);
+      timerIds.forEach(id => {
         window.clearTimeout(id);
         if (process.env.NODE_ENV === 'development') {
           console.warn(`ClearTimeout. timerId: ${id}`);

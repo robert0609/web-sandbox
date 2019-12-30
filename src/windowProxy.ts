@@ -1,8 +1,8 @@
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:58:30
- * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-29 23:22:56
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2019-12-30 15:51:33
  * @Description: 生成window代理对象，构造window全局沙盒
  */
 function generate() {
@@ -13,8 +13,6 @@ function generate() {
   const addedPropsMapInSandbox = new Map<PropertyKey, any>();
   // 沙箱期间更新的全局变量
   const updatedPropsMapInSandbox = new Map<PropertyKey, any>();
-  // 持续记录更新的(新增和修改的)全局变量的 map，用于在任意时刻做 snapshot
-  // const currentUpdatedPropsValueMap = new Map<PropertyKey, any>();
 
   const originalWindow = window;
   const fakeWindow = Object.create(null) as Window;
@@ -53,6 +51,16 @@ function generate() {
 
   return {
     sandbox,
-    reset() {}
+    reset() {
+      addedPropsMapInSandbox.forEach((v, k) => {
+        delete (originalWindow as any)[k];
+      });
+      updatedPropsMapInSandbox.forEach((v, k) => {
+        (originalWindow as any)[k] = modifiedPropsOriginalValueMapInSandbox.get(k);
+      });
+      addedPropsMapInSandbox.clear();
+      updatedPropsMapInSandbox.clear();
+      modifiedPropsOriginalValueMapInSandbox.clear();
+    }
   };
 }
