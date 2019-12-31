@@ -2,7 +2,7 @@
  * @Author: bluefox
  * @Date: 2019-12-28 23:59:29
  * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-31 18:51:57
+ * @LastEditTime : 2019-12-31 19:06:57
  * @Description: hack全局定时器
  */
 
@@ -13,9 +13,8 @@ export default function (target: Window) {
   const timerIds: number[] = [];
   const intervalIds: number[] = [];
 
-  const hookSetInterval = (...args: any[]) => {
-    // @ts-ignore
-    const intervalId = originalWindowInterval(...args);
+  const hookSetInterval = (handler: TimerHandler, timeout?: number, ...args: any[]) => {
+    const intervalId = originalWindowInterval(handler, timeout, ...args);
     intervalIds.push(intervalId);
     if (process.env.NODE_ENV === 'development') {
       console.warn(`Call setInterval. intervalId: ${intervalId}`);
@@ -23,9 +22,8 @@ export default function (target: Window) {
     return intervalId;
   };
 
-  const hookSetTimeout = (...args: any[]) => {
-    // @ts-ignore
-    const timerId = originalWindowTimeout(...args);
+  const hookSetTimeout = (handler: TimerHandler, timeout?: number, ...args: any[]) => {
+    const timerId = originalWindowTimeout(handler, timeout, ...args);
     timerIds.push(timerId);
     if (process.env.NODE_ENV === 'development') {
       console.warn(`Call setTimeout. timerId: ${timerId}`);
@@ -51,4 +49,4 @@ export default function (target: Window) {
       });
     }
   };
-};
+}
