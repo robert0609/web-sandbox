@@ -2,7 +2,7 @@
  * @Author: bluefox
  * @Date: 2019-12-28 23:58:46
  * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-30 00:12:27
+ * @LastEditTime : 2019-12-31 17:40:07
  * @Description: hack事件监听器
  */
 
@@ -12,7 +12,7 @@ export default function (target: EventTarget) {
 
   const listenerMap = new Map<string, EventListenerOrEventListenerObject[]>();
 
-  target.addEventListener = (
+  const hookAddEventListener = (
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions,
@@ -25,7 +25,7 @@ export default function (target: EventTarget) {
     return originalAddEventListener.call(target, type, listener, options);
   };
 
-  target.removeEventListener = (
+  const hookRemoveEventListener = (
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions,
@@ -41,12 +41,12 @@ export default function (target: EventTarget) {
   };
 
   return {
+    hookAddEventListener,
+    hookRemoveEventListener,
     reset() {
       listenerMap.forEach((listeners, type) =>
-        [...listeners].forEach(listener => target.removeEventListener(type, listener)),
+        [...listeners].forEach(listener => hookRemoveEventListener(type, listener)),
       );
-      target.addEventListener = originalAddEventListener;
-      target.removeEventListener = originalRemoveEventListener;
     }
   };
-};
+}
