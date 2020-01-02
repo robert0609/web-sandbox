@@ -1,6 +1,13 @@
+/*
+ * @Author: bluefox
+ * @Date: 2019-12-30 11:50:30
+ * @LastEditors  : bluefox
+ * @LastEditTime : 2020-01-02 11:36:34
+ * @Description: rollup config
+ */
 var resolve = require('@rollup/plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
-var typescript = require('rollup-plugin-typescript2');
+var babel = require("rollup-plugin-babel");
 var { uglify } = require("rollup-plugin-uglify");
 var dependencies = require('./package.json').dependencies;
 var externalDependencies = dependencies ? Object.keys(dependencies) : [];
@@ -17,13 +24,9 @@ var config = {
     commonjs({
       include: 'node_modules/**'
     }),
-    typescript({
-      tsconfig: './tsconfig.prod.json',
-      tsconfigOverride: {
-        compilerOptions: {
-          declarationMap: process.env.NODE_ENV !== 'production'
-        }
-      }
+    babel({
+      exclude: 'node_modules/**',
+      runtimeHelpers: true
     })
   ],
   external: function (moduleName) {
