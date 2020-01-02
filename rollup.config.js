@@ -2,7 +2,7 @@
  * @Author: bluefox
  * @Date: 2019-12-30 11:50:30
  * @LastEditors  : bluefox
- * @LastEditTime : 2020-01-02 11:36:34
+ * @LastEditTime : 2020-01-02 15:04:56
  * @Description: rollup config
  */
 var resolve = require('@rollup/plugin-node-resolve');
@@ -12,6 +12,10 @@ var { uglify } = require("rollup-plugin-uglify");
 var dependencies = require('./package.json').dependencies;
 var externalDependencies = dependencies ? Object.keys(dependencies) : [];
 
+var extensions = [
+  '.js', '.jsx', '.ts', '.tsx',
+];
+
 var config = {
   input: 'src/index.ts',
   output: {
@@ -20,11 +24,12 @@ var config = {
     sourcemap: true
   },
   plugins: [
-    resolve(),
+    resolve({ extensions }),
     commonjs({
       include: 'node_modules/**'
     }),
     babel({
+      extensions,
       exclude: 'node_modules/**',
       runtimeHelpers: true
     })
