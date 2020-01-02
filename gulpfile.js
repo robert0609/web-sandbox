@@ -2,7 +2,7 @@
  * @Author: bluefox
  * @Date: 2019-12-30 11:50:30
  * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-31 19:02:02
+ * @LastEditTime : 2020-01-03 00:37:40
  * @Description: file content
  */
 var gulp = require('gulp');
@@ -35,4 +35,4 @@ function compile() {
 
 exports.default = gulp.series(lint, clean, compile);
 
-exports.lint = lint;
+exports.lint = gulp.series(lint, clean);
