@@ -1,15 +1,16 @@
 /*
  * @Author: bluefox
  * @Date: 2019-12-30 11:50:30
- * @LastEditors  : bluefox
- * @LastEditTime : 2020-01-03 10:56:04
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2020-01-03 14:00:03
  * @Description: rollup config
  */
 var resolve = require('@rollup/plugin-node-resolve');
 var commonjs = require('@rollup/plugin-commonjs');
 var babel = require("rollup-plugin-babel");
-var { uglify } = require("rollup-plugin-uglify");
-var dependencies = require('./package.json').dependencies;
+var { terser } = require('rollup-plugin-terser');
+var pkg = require('./package.json');
+var dependencies = pkg.dependencies;
 var externalDependencies = dependencies ? Object.keys(dependencies) : [];
 
 var extensions = [
@@ -18,11 +19,18 @@ var extensions = [
 
 var config = {
   input: 'src/index.ts',
-  output: {
-    file: 'dist/index.js',
-    format: 'esm',
-    sourcemap: true
-  },
+  output: [
+    {
+      file: pkg.main,
+      format: 'umd',
+      sourcemap: true,
+      name: 'sandbox'
+    },{
+      file: pkg.module,
+      format: 'esm',
+      sourcemap: true
+    }
+  ],
   plugins: [
     resolve({ extensions }),
     commonjs({
@@ -39,10 +47,13 @@ var config = {
   }
 };
 if (process.env.NODE_ENV === 'production') {
-  config.output.sourcemap = false;
-  if (config.output.format !== 'esm') {
-    config.plugins.push(uglify());
-  }
+  config.output.forEach(c => {
+    c.sourcemap = false;
+  });
+  config.plugins.push(terser());
+  // if (config.output.format !== 'esm') {
+  //   config.plugins.push(uglify());
+  // }
 }
 
 module.exports = config;

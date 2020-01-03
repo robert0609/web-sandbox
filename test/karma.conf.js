@@ -1,8 +1,8 @@
 /*
  * @Author: bluefox
  * @Date: 2019-12-30 11:50:30
- * @LastEditors  : bluefox
- * @LastEditTime : 2020-01-03 11:04:04
+ * @LastEditors  : Please set LastEditors
+ * @LastEditTime : 2020-01-03 11:33:19
  * @Description: file content
  */
 var resolve = require('@rollup/plugin-node-resolve');
@@ -41,7 +41,11 @@ module.exports = function (config) {
 				sourcemap: 'inline', // Sensible for testing.
 			},
       plugins: [
-        resolve(),
+        resolve({
+          extensions: [
+            '.js', '.jsx', '.ts', '.tsx',
+          ]
+        }),
         commonjs({
           include: 'node_modules/**',
           namedExports: {
