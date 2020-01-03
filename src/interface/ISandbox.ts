@@ -3,7 +3,11 @@
  * @Date: 2019-12-29 00:27:55
  * @Description: 沙盒类型接口
  */
+export interface IModule {
+  default?: any;
+  [exportName: string]: any;
+}
 export interface ISandbox {
-  mount(): void;
+  mount(): IModule;
   unmount(): void;
 }
