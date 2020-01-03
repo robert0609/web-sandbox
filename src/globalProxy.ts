@@ -3,8 +3,6 @@ import { HtmlElementType } from "./type";
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:58:30
- * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-31 18:41:13
  * @Description: 生成HTML元素的代理对象，包括window，document和HtmlElement
  */
 export default function <T extends HtmlElementType>(target: T) {

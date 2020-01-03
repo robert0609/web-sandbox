@@ -1,8 +1,6 @@
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:59:29
- * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-31 19:06:57
  * @Description: hack全局定时器
  */
 

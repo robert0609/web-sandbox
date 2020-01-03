@@ -6,8 +6,6 @@ import createSandbox from './globalProxy';
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:20:23
- * @LastEditors  : bluefox
- * @LastEditTime : 2019-12-31 18:45:58
  * @Description: 浏览器端JavaScript脚本的沙盒执行环境，会记录全局变量的修改
  *               create方法返回沙盒环境，只有在调用mount挂载沙盒的时候，才会执行hack处理并且运行沙盒中的js逻辑
  */
