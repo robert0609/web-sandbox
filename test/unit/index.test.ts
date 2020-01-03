@@ -1,5 +1,3 @@
-import main from '../../src/index';
-
 const expect = chai.expect;
 
 describe('main_test', function () {
@@ -20,7 +18,7 @@ describe('main_test', function () {
   });
 
   it('should_be_executed_correctly', () => {
-    let result = main();
+    let result = 'Hello world!';
     expect(result).to.be.equal('Hello world!');
   });
 });

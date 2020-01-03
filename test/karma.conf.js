@@ -1,5 +1,12 @@
+/*
+ * @Author: bluefox
+ * @Date: 2019-12-30 11:50:30
+ * @LastEditors  : bluefox
+ * @LastEditTime : 2020-01-03 11:04:04
+ * @Description: file content
+ */
 var resolve = require('@rollup/plugin-node-resolve');
-var commonjs = require('rollup-plugin-commonjs');
+var commonjs = require('@rollup/plugin-commonjs');
 var typescript = require('rollup-plugin-typescript2');
 
 // Karma configuration
@@ -44,6 +51,7 @@ module.exports = function (config) {
           }
         }),
         typescript({
+          tsconfig: './tsconfig.test.json',
           tsconfigOverride: {
             compilerOptions: {
               declaration: false,

@@ -2,11 +2,11 @@
  * @Author: bluefox
  * @Date: 2019-12-30 11:50:30
  * @LastEditors  : bluefox
- * @LastEditTime : 2020-01-02 15:04:56
+ * @LastEditTime : 2020-01-03 10:56:04
  * @Description: rollup config
  */
 var resolve = require('@rollup/plugin-node-resolve');
-var commonjs = require('rollup-plugin-commonjs');
+var commonjs = require('@rollup/plugin-commonjs');
 var babel = require("rollup-plugin-babel");
 var { uglify } = require("rollup-plugin-uglify");
 var dependencies = require('./package.json').dependencies;
