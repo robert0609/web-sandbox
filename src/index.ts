@@ -57,7 +57,7 @@ export default {
 
     return {
       mount() {
-        const wrapperFunction = new Function('window', 'document', 'setInterval', 'setTimeout', source);
+        const wrapperFunction = new Function('window', 'document', 'setInterval', 'setTimeout', `return ${source}`);
         const result = wrapperFunction.call(windowProxy.sandbox, windowProxy.sandbox, documentProxy.sandbox, timerWatcher.hookSetInterval, timerWatcher.hookSetTimeout);
         return result;
       },
