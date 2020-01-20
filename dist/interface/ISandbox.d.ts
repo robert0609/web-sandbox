@@ -3,6 +3,6 @@ export interface IModule {
     [exportName: string]: any;
 }
 export interface ISandbox {
-    mount(): IModule;
+    mount(): IModule | Promise<IModule>;
     unmount(): void;
 }

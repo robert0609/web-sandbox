@@ -1,6 +1,6 @@
 {
   "name": "web-sandbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "sandbox environment where running javascript in browser",
   "main": "dist/index.min.js",
   "module": "dist/index.esm.js",
