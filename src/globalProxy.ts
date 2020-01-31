@@ -27,7 +27,12 @@ export default function <T extends HtmlElementType>(target: T) {
           return v;
         }
       }
-      const v = (originalTarget as any)[p];
+      let v = (originalTarget as any)[p];
+      // when v === "createElement", here reports "Type error: illegal invocation". For fix that, function "v" must be bind originalTarget so that "this" point to document.
+      // reference: https://stackoverflow.com/questions/32423584/document-createelement-illegal-invocation
+      if (typeof v === 'function') {
+        v = v.bind(originalTarget);
+      }
       return v;
     },
     set(_: T, p: PropertyKey, v: any): boolean {
