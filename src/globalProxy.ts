@@ -58,7 +58,7 @@ export default function <T extends HtmlElementType>(target: T) {
         } else if (target instanceof HTMLElement) {
           globalName = target.tagName;
         }
-        console.warn(`Set ${globalName}.${p.toString()} to ${v.toString()}! Original value is ${modifiedPropsOriginalValueMapInSandbox.get(p)}`);
+        console.log(`Set ${globalName}.${p.toString()} to ${v.toString()}! Original value is ${modifiedPropsOriginalValueMapInSandbox.get(p)}`);
       }
       return true;
     },

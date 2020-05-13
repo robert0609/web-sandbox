@@ -18,7 +18,7 @@ export default function (target: EventTarget) {
     const listeners = listenerMap.get(type) || [];
     listenerMap.set(type, [...listeners, listener]);
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`Call addEventListener. eventName: ${type}; eventHandler: ${listener.toString()}`);
+      console.log(`Call addEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
     }
     return originalAddEventListener.call(target, type, listener, options);
   };
@@ -33,7 +33,7 @@ export default function (target: EventTarget) {
       storedTypeListeners.splice(storedTypeListeners.indexOf(listener), 1);
     }
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`Call removeEventListener. eventName: ${type}; eventHandler: ${listener.toString()}`);
+      console.log(`Call removeEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
     }
     return originalRemoveEventListener.call(target, type, listener, options);
   };

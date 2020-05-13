@@ -15,7 +15,7 @@ export default function (target: Window) {
     const intervalId = originalWindowInterval(handler, timeout, ...args);
     intervalIds.push(intervalId);
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`Call setInterval. intervalId: ${intervalId}`);
+      console.log(`Call setInterval. intervalId: ${intervalId}`);
     }
     return intervalId;
   };
@@ -24,7 +24,7 @@ export default function (target: Window) {
     const timerId = originalWindowTimeout(handler, timeout, ...args);
     timerIds.push(timerId);
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`Call setTimeout. timerId: ${timerId}`);
+      console.log(`Call setTimeout. timerId: ${timerId}`);
     }
     return timerId;
   };
@@ -36,13 +36,13 @@ export default function (target: Window) {
       timerIds.forEach(id => {
         target.clearTimeout(id);
         if (process.env.NODE_ENV === 'development') {
-          console.warn(`ClearTimeout. timerId: ${id}`);
+          console.log(`ClearTimeout. timerId: ${id}`);
         }
       });
       intervalIds.forEach(id => {
         target.clearInterval(id);
         if (process.env.NODE_ENV === 'development') {
-          console.warn(`ClearInterval. intervalId: ${id}`);
+          console.log(`ClearInterval. intervalId: ${id}`);
         }
       });
     }

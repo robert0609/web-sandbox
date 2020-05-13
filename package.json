@@ -1,6 +1,6 @@
 {
   "name": "web-sandbox",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "sandbox environment where running javascript in browser",
   "main": "dist/index.min.js",
   "module": "dist/index.esm.js",
@@ -15,7 +15,7 @@
     "lint:test": "gulp lintTest",
     "type-check": "tsc --noEmit",
     "karma": "npm run lint:test && karma start ./test/karma.conf.js",
-    "prepublishOnly": "npm run build && npm run karma"
+    "prepublishOnly": "npm run karma && npm run build"
   },
   "author": "bluefox",
   "devDependencies": {
