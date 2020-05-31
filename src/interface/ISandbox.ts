@@ -9,5 +9,6 @@ export interface IModule {
 }
 export interface ISandbox {
   mount(): IModule | Promise<IModule>;
+  mountWithCommonjs(module: any, exports: any, require: any): void;
   unmount(): void;
 }

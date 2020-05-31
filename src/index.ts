@@ -36,6 +36,10 @@ export default {
         return eventWatcherOfWindow.hookAddEventListener;
       } else if (p === 'removeEventListener') {
         return eventWatcherOfWindow.hookRemoveEventListener;
+      } else if (p === 'Promise') {
+        return t.Promise;
+      } else if (p === 'Object') {
+        return t.Object;
       }
     });
     documentProxy.setGetProperty((t, p) => {
@@ -60,6 +64,12 @@ export default {
         const wrapperFunction = new Function('window', 'document', 'setInterval', 'setTimeout', `return ${source}`);
         const result = wrapperFunction.call(windowProxy.sandbox, windowProxy.sandbox, documentProxy.sandbox, timerWatcher.hookSetInterval, timerWatcher.hookSetTimeout);
         return result;
+      },
+      mountWithCommonjs(module: any, exports: any, require: any) {
+        const wrapperFunction = function(window: any, document: any, setInterval: any, setTimeout: any, module: any, exports: any, require: any) {
+          eval(source);
+        };
+        wrapperFunction.call(windowProxy.sandbox, windowProxy.sandbox, documentProxy.sandbox, timerWatcher.hookSetInterval, timerWatcher.hookSetTimeout, module, exports, require);
       },
       unmount() {
         [ windowProxy, documentProxy, bodyProxy, timerWatcher, eventWatcherOfWindow, eventWatcherOfDocument, eventWatcherOfBody ].forEach(m => {
