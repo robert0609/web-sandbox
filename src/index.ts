@@ -61,9 +61,10 @@ export default {
 
     return {
       mount() {
-        const wrapperFunction = new Function('window', 'document', 'setInterval', 'setTimeout', `return ${source}`);
-        const result = wrapperFunction.call(windowProxy.sandbox, windowProxy.sandbox, documentProxy.sandbox, timerWatcher.hookSetInterval, timerWatcher.hookSetTimeout);
-        return result;
+        const wrapperFunction = function(window: any, document: any, setInterval: any, setTimeout: any) {
+          return eval(source);
+        };
+        return wrapperFunction.call(windowProxy.sandbox, windowProxy.sandbox, documentProxy.sandbox, timerWatcher.hookSetInterval, timerWatcher.hookSetTimeout);
       },
       mountWithCommonjs(module: any, exports: any, require: any) {
         const wrapperFunction = function(window: any, document: any, setInterval: any, setTimeout: any, module: any, exports: any, require: any) {
