@@ -1,6 +1,6 @@
 {
   "name": "roy-web-sandbox",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "sandbox environment where running javascript in browser",
   "main": "dist/index.min.js",
   "module": "dist/index.esm.js",

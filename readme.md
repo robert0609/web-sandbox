@@ -1,4 +1,4 @@
-# web-sandbox
+# roy-web-sandbox
 
 > sandbox environment where running javascript in browser
 
@@ -17,34 +17,21 @@ npm run build
 
 ## Install
 
-```javascript
-npm install --save web-sandbox
+```bash
+npm install --save roy-web-sandbox
 ```
 
 ## Usage
 
 ```javascript
-// How to use?
-```
+import sandboxManager from 'roy-web-sandbox';
 
-## API Reference
+const sandbox = sandboxManager.create(`
+window.a = 10;
+console.log(window.a);
+`);
 
-### API signature
+sandbox.mount();  // 10
+console.log(window.a); // undefined
 
-* parameter
-
-  name|type|required|default|description
-  -|-|-|-|-
-
-* return
-
-  type|description
-  -|-
-
-## Options
-
-## Examples
-
-```javascript
-// Example
 ```
