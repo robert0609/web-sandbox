@@ -2,6 +2,7 @@ import { ISandbox } from "./interface/ISandbox";
 import hackTimer from "./hackTimer";
 import hackEventListener from "./hackEventListener";
 import createSandbox from './globalProxy';
+import global from './global';
 
 /*
  * @Author: bluefox
@@ -11,6 +12,9 @@ import createSandbox from './globalProxy';
  */
 
 export default {
+  set debug(v: boolean) {
+    global.debug = v;
+  },
   create(source: string): ISandbox {
     // 创建全局代理对象，监控全局属性的变化
     const windowProxy = createSandbox(window);

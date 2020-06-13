@@ -1,3 +1,6 @@
+import global from './global';
+import { safeLog } from './utils';
+
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:58:46
@@ -17,8 +20,8 @@ export default function (target: EventTarget) {
   ) => {
     const listeners = listenerMap.get(type) || [];
     listenerMap.set(type, [...listeners, listener]);
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Call addEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
+    if (global.debug) {
+      safeLog(`Call addEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
     }
     return originalAddEventListener.call(target, type, listener, options);
   };
@@ -32,8 +35,8 @@ export default function (target: EventTarget) {
     if (storedTypeListeners && storedTypeListeners.length && storedTypeListeners.indexOf(listener) !== -1) {
       storedTypeListeners.splice(storedTypeListeners.indexOf(listener), 1);
     }
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Call removeEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
+    if (global.debug) {
+      safeLog(`Call removeEventListener. eventName: ${type}; eventHandler: ${listener ? listener.toString() : 'null'}`);
     }
     return originalRemoveEventListener.call(target, type, listener, options);
   };

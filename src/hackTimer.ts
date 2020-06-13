@@ -1,3 +1,6 @@
+import global from './global';
+import { safeLog } from './utils';
+
 /*
  * @Author: bluefox
  * @Date: 2019-12-28 23:59:29
@@ -14,8 +17,8 @@ export default function (target: Window) {
   const hookSetInterval = (handler: TimerHandler, timeout?: number, ...args: any[]) => {
     const intervalId = originalWindowInterval(handler, timeout, ...args);
     intervalIds.push(intervalId);
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Call setInterval. intervalId: ${intervalId}`);
+    if (global.debug) {
+      safeLog(`Call setInterval. intervalId: ${intervalId}`);
     }
     return intervalId;
   };
@@ -23,8 +26,8 @@ export default function (target: Window) {
   const hookSetTimeout = (handler: TimerHandler, timeout?: number, ...args: any[]) => {
     const timerId = originalWindowTimeout(handler, timeout, ...args);
     timerIds.push(timerId);
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Call setTimeout. timerId: ${timerId}`);
+    if (global.debug) {
+      safeLog(`Call setTimeout. timerId: ${timerId}`);
     }
     return timerId;
   };
@@ -35,14 +38,14 @@ export default function (target: Window) {
     reset() {
       timerIds.forEach(id => {
         target.clearTimeout(id);
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`ClearTimeout. timerId: ${id}`);
+        if (global.debug) {
+          safeLog(`ClearTimeout. timerId: ${id}`);
         }
       });
       intervalIds.forEach(id => {
         target.clearInterval(id);
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`ClearInterval. intervalId: ${id}`);
+        if (global.debug) {
+          safeLog(`ClearInterval. intervalId: ${id}`);
         }
       });
     }

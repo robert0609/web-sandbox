@@ -8,3 +8,11 @@
 export async function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function safeLog(...args: any[]) {
+  try {
+    console.log(...args);
+  } catch (e) {
+    console.warn(e);
+  }
+}

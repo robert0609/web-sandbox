@@ -1,4 +1,6 @@
 import { HtmlElementType } from "./type";
+import global from './global';
+import { safeLog } from "./utils";
 
 /*
  * @Author: bluefox
@@ -49,7 +51,7 @@ export default function <T extends HtmlElementType>(target: T) {
         }
       }
       (originalTarget as any)[p] = v;
-      if (process.env.NODE_ENV === 'development') {
+      if (global.debug) {
         let globalName = '';
         if (target instanceof Window) {
           globalName = 'window';
@@ -58,7 +60,7 @@ export default function <T extends HtmlElementType>(target: T) {
         } else if (target instanceof HTMLElement) {
           globalName = target.tagName;
         }
-        console.log(`Set ${globalName}.${p.toString()} to ${v.toString()}! Original value is ${modifiedPropsOriginalValueMapInSandbox.get(p)}`);
+        safeLog('Set ', `${globalName}.${p.toString()} to `, v, '! Original value is ', modifiedPropsOriginalValueMapInSandbox.get(p));
       }
       return true;
     },
