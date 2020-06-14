@@ -1,6 +1,6 @@
 import { HtmlElementType } from "./type";
 import global from './global';
-import { safeLog } from "./utils";
+import { safeLog, isClass } from "./utils";
 
 /*
  * @Author: bluefox
@@ -32,7 +32,7 @@ export default function <T extends HtmlElementType>(target: T) {
       let v = (originalTarget as any)[p];
       // when v === "createElement", here reports "Type error: illegal invocation". For fix that, function "v" must be bind originalTarget so that "this" point to document.
       // reference: https://stackoverflow.com/questions/32423584/document-createelement-illegal-invocation
-      if (typeof v === 'function') {
+      if (typeof v === 'function' && !isClass(v)) {
         v = v.bind(originalTarget);
       }
       return v;
